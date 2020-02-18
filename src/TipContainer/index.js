@@ -7,7 +7,8 @@ class TipContainer extends React.Component {
 		super(props)
 
 		this.state = {
-			tips: []
+			tips: [],
+			category: ''
 		}
 	}
 
@@ -30,11 +31,25 @@ class TipContainer extends React.Component {
 		}
 	}
 
+	changeCategory = (category) => {
+		this.setState({
+			category: category
+		})
+	}
+
 	render() {
 		return(
 			<div>
-				<h1>TipContainer</h1>
-				<TipList tips={this.state.tips}/>
+				<div>
+					<h1 onClick={() => this.changeCategory('movies')}>Movies</h1>
+					<h1 onClick={() => this.changeCategory('shows')}>Shows</h1>
+					<h1 onClick={() => this.changeCategory('music')}>Music</h1>
+					<h1 onClick={() => this.changeCategory('books')}>Books</h1>
+				</div>
+				<TipList 
+				tips={this.state.tips}
+				category={this.state.category}
+				/>
 			</div>
 		)
 	}

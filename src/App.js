@@ -67,7 +67,7 @@ login = async (loginInfo) => {
   render() {
     return(
       <div className="App">
-        <h1>Tips App</h1>
+        <h1>Tipped Off</h1>
         {
           this.state.loggedIn === true
           ?
