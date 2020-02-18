@@ -68,11 +68,16 @@ login = async (loginInfo) => {
     return(
       <div className="App">
         <h1>Tips App</h1>
-        <TipContainer/>
-        <LoginRegister
-        register={this.register}
-        login={this.login}
-        />
+        {
+          this.state.loggedIn === true
+          ?
+          <TipContainer/>
+          :
+          <LoginRegister
+          register={this.register}
+          login={this.login}
+          />
+        }
       </div> 
     )
   }
