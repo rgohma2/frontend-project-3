@@ -3,9 +3,9 @@ import React from 'react'
 import { Form, Button, Label } from 'semantic-ui-react'
 
 class LoginRegister extends React.Component {
-	constructor() {
+	constructor(props) {
 
-		super()
+		super(props)
 
 		this.state = {
 			name: '',
@@ -15,9 +15,13 @@ class LoginRegister extends React.Component {
 		}
 	}
 
+	// componentDidMount() {
+	// 	console.log(this.props.register);
+	// }
+
 	switchForm = () => {
 		this.setState({
-			action: this.state.action === 'register' ? 'login' : 'register'
+			action: this.state.action === 'sign up' ? 'login' : 'sign up'
 		})
 	}
 
@@ -27,27 +31,46 @@ class LoginRegister extends React.Component {
 		})
 	}
 
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.LoginRegister()
+	}
+
+	LoginRegister = () => {
+		if (this.props.action === 'sign up') {
+			this.props.register(this.state)
+		} else {
+			this.props.login(this.state)
+		}
+	}
+
 
 	render() {
 		return(
 			<div>
-			<h2 className='capitalize'>{this.state.action}</h2>
-			<Form.Field>
 			{
-				this.state.action === 'register'
+				this.state.action === 'login'
 				?
-				<div>
-					<Label>Name</Label>
-					<Form.Input 
-					type='text'
-					name='name'
-					value={this.state.name}
-					onChange={this.handleChange}
-					/>
-				</div>
+				<h2>Login</h2>
 				:
-				null
+				<h2>Sign Up</h2>
 			}
+			<Form onSubmit={this.handleSubmit}>
+				{
+					this.state.action === 'sign up'
+					?
+					<div>
+						<Label>Name</Label>
+						<Form.Input 
+						type='text'
+						name='name'
+						value={this.state.name}
+						onChange={this.handleChange}
+						/>
+					</div>
+					:
+					null
+				}
 				<Label>Email</Label>
 				<Form.Input 
 				type='text'
@@ -62,8 +85,15 @@ class LoginRegister extends React.Component {
 				value={this.state.password}
 				onChange={this.handleChange}
 				/>
-				<Button type='submit'>Login</Button>
-			</Form.Field>
+				<Button className='capitalize' type='submit'>{this.state.action}</Button>
+			</Form>
+				{
+					this.state.action === 'sign up'
+					?
+					<small>already have an account? log in <span className='link' onClick={this.switchForm}>here</span>.</small>
+					: 
+					<small>don't have an account yet? sign up <span className='link' onClick={this.switchForm}>here</span>.</small>
+				}
 			</div>
 		)
 	}

@@ -6,3 +6,9 @@
   text-transform: capitalize;
 }
 
+.link {
+	text-decoration: underline;
+	color: purple;
+	cursor: pointer;
+}
+
