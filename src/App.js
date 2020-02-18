@@ -50,6 +50,7 @@ login = async (loginInfo) => {
         }
     })
     const loginJson = await response.json()
+    console.log(loginJson);
 
     if (loginJson.status === 200) {
       this.setState({
