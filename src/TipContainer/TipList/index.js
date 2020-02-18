@@ -3,7 +3,7 @@ import React from 'react'
 function TipList(props){
 
 	
-	
+	//** Top Tips ** based on votes (to be implemeted later)
 	const tips = props.tips.filter(tip => tip.category === props.category)
 	console.log(tips);
 	return(
@@ -11,9 +11,7 @@ function TipList(props){
 			<ul>
 			{tips.map(tip => {
 				return <li key={tip.id}>
-					Category: {tip.category}
-					<br />
-					{tip.tip}
+					Tip: {tip.tip}
 					<br />
 					{tip.description}
 				</li>

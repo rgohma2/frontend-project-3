@@ -1,5 +1,6 @@
 import React from 'react'
 import TipList from './TipList'
+import NewTipForm from './NewTipForm'
 
 class TipContainer extends React.Component {
 	constructor(props) {
@@ -50,6 +51,7 @@ class TipContainer extends React.Component {
 				tips={this.state.tips}
 				category={this.state.category}
 				/>
+				<NewTipForm />
 			</div>
 		)
 	}
