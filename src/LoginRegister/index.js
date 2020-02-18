@@ -21,6 +21,12 @@ class LoginRegister extends React.Component {
 		})
 	}
 
+	handleChange = (event) => {
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
+
 
 	render() {
 		return(
@@ -30,21 +36,21 @@ class LoginRegister extends React.Component {
 				type='text'
 				name='name'
 				value={this.state.name}
-				// onChange={this.handleChange}
+				onChange={this.handleChange}
 				/>
 				<Label>Email</Label>
 				<Form.Input 
 				type='text'
 				name='email'
 				value={this.state.email}
-				// onChange={this.handleChange}
+				onChange={this.handleChange}
 				/>
 				<Label>Password</Label>
 				<Form.Input 
 				type='password'
 				name='password'
 				value={this.state.password}
-				// onChange={this.handleChange}
+				onChange={this.handleChange}
 				/>
 				<Button type='submit'>Login</Button>
 			</Form.Field>
