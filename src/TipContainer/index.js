@@ -14,6 +14,7 @@ class TipContainer extends React.Component {
 			tips: [],
 			category: '',
 			visible: false,
+			newModalOpen: false,
 			idOfTipToEdit: -1
 		}
 	}
@@ -94,7 +95,13 @@ class TipContainer extends React.Component {
 		})
 	}
 
-	closeModal = () => {
+    toggleNewModal = () => {
+    	this.setState({
+    		newModalOpen: this.state.newModalOpen === false ? true : false
+    	})
+    }
+
+	closeEditModal = () => {
 		this.setState({
 			idOfTipToEdit: -1
 		})
@@ -120,7 +127,7 @@ class TipContainer extends React.Component {
     			this.setState({
     				tips: tips
     			})
-    			this.closeModal()
+    			this.closeEditModal()
     		}
     }
 
@@ -150,17 +157,28 @@ class TipContainer extends React.Component {
 			      <Menu.Item as='a' onClick={() => this.changeCategory('books')}>
 			        Books
 			      </Menu.Item>
+			      <Menu.Item>
+			      </Menu.Item>
+			      <Menu.Item as='a' onClick={this.toggleNewModal}>
+			      	Add A Tip
+			      </Menu.Item>
+
 			    </Sidebar>
 
 			    <Sidebar.Pusher>
 			      <Segment basic>
-			        <Header as='h3' onClick={() => 
-			        	this.state.visible === true
-			        	?
-			        	this.setState({visible:false})
-			        	:
-			        	this.setState({visible:true})
-			        }>Application Content</Header>
+			      <Segment>
+				        <Header as='h3' onClick={() => 
+				        	this.state.visible === true
+				        	?
+				        	this.setState({visible:false})
+				        	:
+				        	this.setState({visible:true})
+				        }>Menu</Header>
+				    </Segment>
+			        <Segment>
+			        	<Header className='capitalize'>{this.state.category}</Header>
+			        </Segment>
 			        <TipList 
 			        loggedIn={this.props.loggedIn}
 			        currentUserEmail={this.props.currentUserEmail}
@@ -169,16 +187,23 @@ class TipContainer extends React.Component {
 					deleteTip={this.deleteTip}
 					editTip={this.editTip}
 					/>
-					<NewTipForm 
-					addTip={this.addTip}
-					/>
+					{
+						this.state.newModalOpen === true
+						?
+						<NewTipForm 
+						addTip={this.addTip}
+						toggleNewModal={this.toggleNewModal}
+						/>
+						:
+						null
+					}
 					{
 						this.state.idOfTipToEdit !== -1
 						?
 						<EditTipModal
 						tipToEdit={this.state.tips.find(tip => tip.id === this.state.idOfTipToEdit)}
 						updateTip={this.updateTip}
-						closeModal={this.closeModal}
+						closeEditModal={this.closeEditModal}
 						/>
 						:
 						null

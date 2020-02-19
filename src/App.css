@@ -12,5 +12,9 @@
 	cursor: pointer;
 }
 
+.loginContainer {
+	display: flex;
+	justify-content: center;
+}
 
 

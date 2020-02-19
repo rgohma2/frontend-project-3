@@ -78,10 +78,14 @@ login = async (loginInfo) => {
           currentUserEmail={this.state.currentUserEmail}
           />
           :
-          <LoginRegister
-          register={this.register}
-          login={this.login}
-          />
+          <div className='loginContainer'>
+            <div>
+            <LoginRegister
+            register={this.register}
+            login={this.login}
+            />
+            </div>
+          </div>
         }
       </div> 
     )

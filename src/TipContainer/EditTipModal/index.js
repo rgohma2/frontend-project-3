@@ -49,7 +49,7 @@ class EditTipModal extends React.Component {
 
 	render() {
 		return(
-			<Modal open={true} closeIcon={true} onClose={this.props.closeModal}>
+			<Modal open={true} closeIcon={true} onClose={this.props.closeEditModal}>
 				<Modal.Header>Edit Tip</Modal.Header>
 					<Modal.Content>
 						<Form onSubmit={this.handleSubmit}>

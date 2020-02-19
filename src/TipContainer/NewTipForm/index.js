@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {Form, Label, Button, Segment} from 'semantic-ui-react'
+import {Form, Label, Button, Modal} from 'semantic-ui-react'
 
 class NewTipForm extends React.Component {
 	constructor() {
@@ -43,6 +43,7 @@ class NewTipForm extends React.Component {
 			tip: '',
 			description: ''
 		})
+		this.props.toggleNewModal()
 	}
 
 
@@ -50,37 +51,40 @@ class NewTipForm extends React.Component {
 	render() {
 	
 		return(
-			<Segment>
-				<Form onSubmit={this.handleSubmit}>
-					<Label>Category</Label>
-					<Form.Select
-					placeholder='Example: Movies'
-					fluid
-					name='category'
-					options={this.state.options}
-					onChange={(e, { value }) => this.setState({
-						category: value
-					})}	
-					/>
-					<Label>Tip</Label>
-					<Form.Input
-					type='text'
-					name='tip'
-					placeholder='Example: Intersteller'
-					value={this.state.tip}
-					onChange={this.handleChange}
-					/>
-					<Label>Description</Label>
-					<Form.Input
-					type='text'
-					name='description'
-					placeholder='Example: What makes this movie great is...'
-					value={this.state.description}
-					onChange={this.handleChange}
-					/>
-					<Button>Create New Tip</Button>
-				</Form>
-			</Segment>
+			<Modal open={true} closeIcon={true} onClose={this.props.toggleNewModal}>
+				<Modal.Header>Add A Tip</Modal.Header>
+				<Modal.Content>
+					<Form onSubmit={this.handleSubmit}>
+						<Label>Category</Label>
+						<Form.Select
+						placeholder='Example: Movies'
+						fluid
+						name='category'
+						options={this.state.options}
+						onChange={(e, { value }) => this.setState({
+							category: value
+						})}	
+						/>
+						<Label>Tip</Label>
+						<Form.Input
+						type='text'
+						name='tip'
+						placeholder='Example: Intersteller'
+						value={this.state.tip}
+						onChange={this.handleChange}
+						/>
+						<Label>Description</Label>
+						<Form.Input
+						type='text'
+						name='description'
+						placeholder='Example: What makes this movie great is...'
+						value={this.state.description}
+						onChange={this.handleChange}
+						/>
+						<Button>Create New Tip</Button>
+					</Form>
+				</Modal.Content>
+			</Modal>
 		)
 	}
 }
