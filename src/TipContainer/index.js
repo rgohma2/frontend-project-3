@@ -38,8 +38,26 @@ class TipContainer extends React.Component {
 		})
 	}
 
-	addTip = (newTipInfo) => {
+	addTip = async (newTipInfo) => {
 		console.log(newTipInfo);
+		const url = process.env.REACT_APP_API_URL + '/api/v1/tips/'
+		try {
+			const response = await fetch(url, {
+				credentials: 'include',
+     			method: 'POST',
+		    	body: JSON.stringify(newTipInfo),
+		    	headers: {
+		    		'Content-Type': 'application/json'
+        		}
+			})
+			const tipJson = await response.json()
+			console.log(tipJson);
+			this.setState({
+				tips: [...this.state.tips, tipJson.data]
+			})
+		} catch(err) {
+			console.log(err);
+		}
 	}
 
 	render() {

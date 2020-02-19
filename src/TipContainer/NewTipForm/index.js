@@ -26,7 +26,6 @@ class NewTipForm extends React.Component {
 	)}
 
 	handleChange = (event) => {
-		console.log(event.target);
 		this.setState({
 			[event.target.name]: event.target.value
 		})
@@ -55,7 +54,7 @@ class NewTipForm extends React.Component {
 				<Form onSubmit={this.handleSubmit}>
 					<Label>Category</Label>
 					<Form.Select
-					placeholder='Select a Category'
+					placeholder='Example: Movies'
 					fluid
 					name='category'
 					options={this.state.options}
@@ -67,6 +66,7 @@ class NewTipForm extends React.Component {
 					<Form.Input
 					type='text'
 					name='tip'
+					placeholder='Example: Intersteller'
 					value={this.state.tip}
 					onChange={this.handleChange}
 					/>
@@ -74,6 +74,7 @@ class NewTipForm extends React.Component {
 					<Form.Input
 					type='text'
 					name='description'
+					placeholder='Example: What makes this movie great is...'
 					value={this.state.description}
 					onChange={this.handleChange}
 					/>
