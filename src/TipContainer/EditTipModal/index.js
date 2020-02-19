@@ -34,13 +34,22 @@ class EditTipModal extends React.Component {
 		})
 	}
 
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.props.updateTip({
+			category: this.state.category,
+			tip: this.state.tip,
+			description: this.state.description
+		})
+	}
+
 
 
 
 
 	render() {
 		return(
-			<Modal open={true} closeIcon={true}>
+			<Modal open={true} closeIcon={true} onClose={this.props.closeModal}>
 				<Modal.Header>Edit Tip</Modal.Header>
 					<Modal.Content>
 						<Form onSubmit={this.handleSubmit}>

@@ -94,13 +94,34 @@ class TipContainer extends React.Component {
 		})
 	}
 
-	// updateTip = async (id) => {
-	// 	const url = process.env.REACT_APP_API_URL + '/api/v1/tips/' + id
-	// 	const response = await fetch(url, {
+	closeModal = () => {
+		this.setState({
+			idOfTipToEdit: -1
+		})
+	}
 
-	// 	})
+	updateTip = async (updateInfo) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/tips/' + this.state.idOfTipToEdit
+		const response = await fetch(url, {
+			credentials: 'include',
+ 			method: 'PUT',
+	    	body: JSON.stringify(updateInfo),
+	    	headers: {
+	    		'Content-Type': 'application/json'
+    		}
+    	})
+    		const updateJson = await response.json()
+    		console.log(updateJson);
 
-	// }
+    		if (updateJson.status === 200) {
+    			const tips = this.state.tips
+    			const index = tips.findById(tip => tip.id === this.state.idOfTipToEdit)
+    			tips[index] = updateJson.data 
+    			this.setState({
+    				tips: tips
+    			})
+    		}
+    }
 
 	render() {
 		return(
@@ -155,6 +176,8 @@ class TipContainer extends React.Component {
 						?
 						<EditTipModal
 						tipToEdit={this.state.tips.find(tip => tip.id === this.state.idOfTipToEdit)}
+						updateTip={this.updateTip}
+						closeModal={this.closeModal}
 						/>
 						:
 						null
