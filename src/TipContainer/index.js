@@ -4,7 +4,7 @@ import NewTipForm from './NewTipForm'
 import EditTipModal from './EditTipModal'
 import './index.css'
 
-import {Header, Sidebar, Menu, Segment} from 'semantic-ui-react'
+import {Header, Sidebar, Menu, Segment, Icon} from 'semantic-ui-react'
 
 class TipContainer extends React.Component {
 	constructor(props) {
@@ -133,6 +133,10 @@ class TipContainer extends React.Component {
     }
 
 	render() {
+		const movies = <Icon name='film' />
+		const shows = <Icon name='tv' />
+		const music = <Icon name='music' />
+		const books = <Icon name='book' />
 		return(
 			<div>
 				<Sidebar.Pushable as={Segment}>
@@ -147,15 +151,19 @@ class TipContainer extends React.Component {
 			      width='thin'
 			    >
 			      <Menu.Item as='a' onClick={() => this.changeCategory('movies')}>
+			      	{movies}
 			        Movies
 			      </Menu.Item>
 			      <Menu.Item as='a'onClick={() => this.changeCategory('shows')}>
+			      	{shows}
 			        Shows
 			      </Menu.Item>
 			      <Menu.Item as='a' onClick={() => this.changeCategory('music')}>
+			        {music}
 			        Music
 			      </Menu.Item>
 			      <Menu.Item as='a' onClick={() => this.changeCategory('books')}>
+			        {books}
 			        Books
 			      </Menu.Item>
 			      <Menu.Item>
@@ -165,10 +173,12 @@ class TipContainer extends React.Component {
 			      	this.props.loggedIn === false
 			      	?
 			      	<Menu.Item as='a' onClick={this.props.toggleLoginRender}>
+			      		<Icon name='sign-in'/>
 			      		Login
 			      	</Menu.Item>
 			      	:
 			      	<Menu.Item as='a' onClick={this.toggleNewModal}>
+			      		<Icon name='plus circle'/>
 			      		Add A Tip
 			      	</Menu.Item>
 			      }
@@ -176,6 +186,7 @@ class TipContainer extends React.Component {
 			      	this.props.loggedIn === true
 			      	?
 			      	<Menu.Item as='a' onClick={this.props.logout}>
+			      		<Icon name='sign-out'/>
 			      		Logout
 			      	</Menu.Item>
 			      	:
