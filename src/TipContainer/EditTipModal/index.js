@@ -80,7 +80,7 @@ class EditTipModal extends React.Component {
 						value={this.state.description}
 						onChange={this.handleChange}
 						/>
-						<Button>Update Tip</Button>
+						<Button type="submit">Update Tip</Button>
 					</Form>
 				</Modal.Content>
 			</Modal>
