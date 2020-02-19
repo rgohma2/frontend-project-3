@@ -38,6 +38,10 @@ class TipContainer extends React.Component {
 		})
 	}
 
+	addTip = (newTipInfo) => {
+		console.log(newTipInfo);
+	}
+
 	render() {
 		return(
 			<div>
@@ -50,8 +54,11 @@ class TipContainer extends React.Component {
 				<TipList 
 				tips={this.state.tips}
 				category={this.state.category}
+
 				/>
-				<NewTipForm />
+				<NewTipForm 
+				addTip={this.addTip}
+				/>
 			</div>
 		)
 	}

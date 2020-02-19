@@ -10,34 +10,58 @@ class NewTipForm extends React.Component {
 		this.state = {
 			category: '',
 			tip: '',
-			description: ''
+			description: '',
+			options: this.getOptions()
 		}
 	}
 
-	handleChange = (event) => {
-		this.setState({
-			[event.target.name]: event.target.value
-		})
-	}
-
-
-	render() {
-	const categories = 
+	getOptions = () => {
+		return(
 	[
 		{key: 1, text: 'Movies', value: 'movies'},
 		{key: 2, text: 'Shows', value: 'shows'},
 		{key: 3, text: 'Music', value: 'music'},
 		{key: 4, text: 'Books', value: 'books'}
 	]
+	)}
+
+	handleChange = (event) => {
+		console.log(event.target);
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
+
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.props.addTip({
+			category: this.state.category,
+			tip: this.state.tip,
+			description: this.state.description
+		})
+		this.setState({
+			category: '',
+			tip: '',
+			description: ''
+		})
+	}
+
+
+
+	render() {
+	
 		return(
 			<Segment>
-				<Form>
+				<Form onSubmit={this.handleSubmit}>
 					<Label>Category</Label>
 					<Form.Select
 					placeholder='Select a Category'
 					fluid
 					name='category'
-					options={categories}
+					options={this.state.options}
+					onChange={(e, { value }) => this.setState({
+						category: value
+					})}	
 					/>
 					<Label>Tip</Label>
 					<Form.Input
