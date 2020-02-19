@@ -94,13 +94,13 @@ class TipContainer extends React.Component {
 		})
 	}
 
-	updateTip = async (id) => {
-		const url = process.env.REACT_APP_API_URL + '/api/v1/tips/' + id
-		const response = await fetch(url, {
+	// updateTip = async (id) => {
+	// 	const url = process.env.REACT_APP_API_URL + '/api/v1/tips/' + id
+	// 	const response = await fetch(url, {
 
-		})
+	// 	})
 
-	}
+	// }
 
 	render() {
 		return(
@@ -154,6 +154,7 @@ class TipContainer extends React.Component {
 						this.state.idOfTipToEdit !== -1
 						?
 						<EditTipModal
+						tipToEdit={this.state.tips.find(tip => tip.id === this.state.idOfTipToEdit)}
 						/>
 						:
 						null
@@ -167,9 +168,3 @@ class TipContainer extends React.Component {
 }
 
 export default TipContainer
-				// <div className='nav'>
-				// 	<h1 onClick={() => this.changeCategory('movies')}>Movies</h1>
-				// 	<h1 onClick={() => this.changeCategory('shows')}>Shows</h1>
-				// 	<h1 onClick={() => this.changeCategory('music')}>Music</h1>
-				// 	<h1 onClick={() => this.changeCategory('books')}>Books</h1>
-				// </div>
