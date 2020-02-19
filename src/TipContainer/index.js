@@ -2,6 +2,8 @@ import React from 'react'
 import TipList from './TipList'
 import NewTipForm from './NewTipForm'
 
+import {Header, Sidebar, Menu, Segment} from 'semantic-ui-react'
+
 class TipContainer extends React.Component {
 	constructor(props) {
 
@@ -9,7 +11,8 @@ class TipContainer extends React.Component {
 
 		this.state = {
 			tips: [],
-			category: ''
+			category: '',
+			visible: false
 		}
 	}
 
@@ -63,23 +66,62 @@ class TipContainer extends React.Component {
 	render() {
 		return(
 			<div>
-				<div>
-					<h1 onClick={() => this.changeCategory('movies')}>Movies</h1>
-					<h1 onClick={() => this.changeCategory('shows')}>Shows</h1>
-					<h1 onClick={() => this.changeCategory('music')}>Music</h1>
-					<h1 onClick={() => this.changeCategory('books')}>Books</h1>
-				</div>
-				<TipList 
-				tips={this.state.tips}
-				category={this.state.category}
+				<Sidebar.Pushable as={Segment}>
+			    <Sidebar
+			      as={Menu}
+			      animation='overlay'
+			      icon='labeled'
+			      inverted
+			      
+			      vertical
+			      visible={this.state.visible}
+			      width='thin'
+			    >
+			      <Menu.Item as='a' onClick={() => this.changeCategory('movies')}>
+			        Movies
+			      </Menu.Item>
+			      <Menu.Item as='a'onClick={() => this.changeCategory('shows')}>
+			        Shows
+			      </Menu.Item>
+			      <Menu.Item as='a' onClick={() => this.changeCategory('music')}>
+			        Music
+			      </Menu.Item>
+			      <Menu.Item as='a' onClick={() => this.changeCategory('books')}>
+			        Books
+			      </Menu.Item>
+			    </Sidebar>
 
-				/>
-				<NewTipForm 
-				addTip={this.addTip}
-				/>
+			    <Sidebar.Pusher>
+			      <Segment basic>
+			        <Header as='h3' onClick={() => 
+			        	this.state.visible === true
+			        	?
+			        	this.setState({visible:false})
+			        	:
+			        	this.setState({visible:true})
+			        }>Application Content</Header>
+			        <TipList 
+			        loggedIn={this.props.loggedIn}
+			        currentUserEmail={this.props.currentUserEmail}
+					tips={this.state.tips}
+					category={this.state.category}
+
+					/>
+					<NewTipForm 
+					addTip={this.addTip}
+					/>
+			      </Segment>
+			    </Sidebar.Pusher>
+			  </Sidebar.Pushable>	
 			</div>
 		)
 	}
 }
 
 export default TipContainer
+				// <div className='nav'>
+				// 	<h1 onClick={() => this.changeCategory('movies')}>Movies</h1>
+				// 	<h1 onClick={() => this.changeCategory('shows')}>Shows</h1>
+				// 	<h1 onClick={() => this.changeCategory('music')}>Music</h1>
+				// 	<h1 onClick={() => this.changeCategory('books')}>Books</h1>
+				// </div>

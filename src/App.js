@@ -9,7 +9,8 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: false,
-      currentUserName: ''
+      currentUserName: '',
+      currentUserEmail: '',
     }
   }
 
@@ -55,7 +56,8 @@ login = async (loginInfo) => {
     if (loginJson.status === 200) {
       this.setState({
         loggedIn: true,
-        currentUserName: loginJson.data.name
+        currentUserName: loginJson.data.name,
+        currentUserEmail: loginJson.data.email
       })
     }
 
@@ -71,7 +73,10 @@ login = async (loginInfo) => {
         {
           this.state.loggedIn === true
           ?
-          <TipContainer/>
+          <TipContainer
+          loggedIn={this.state.loggedIn}
+          currentUserEmail={this.state.currentUserEmail}
+          />
           :
           <LoginRegister
           register={this.register}
