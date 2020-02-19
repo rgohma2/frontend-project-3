@@ -9,8 +9,9 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: false,
+      renderLogin: false,
       currentUserName: '',
-      currentUserEmail: '',
+      currentUserEmail: ''
     }
   }
 
@@ -36,6 +37,12 @@ register = async (registerInfo) => {
   }
 }
 
+showLogin = () => {
+  this.setState({
+    renderLogin: true
+  })
+}
+
 login = async (loginInfo) => {
   console.log(loginInfo);
   const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
@@ -55,6 +62,7 @@ login = async (loginInfo) => {
 
     if (loginJson.status === 200) {
       this.setState({
+        renderLogin: false,
         loggedIn: true,
         currentUserName: loginJson.data.name,
         currentUserEmail: loginJson.data.email
@@ -66,19 +74,40 @@ login = async (loginInfo) => {
   }
 }
 
+logout = async () => {
+  const url = process.env.REACT_APP_API_URL + '/api/v1/users/logout'
+  try{
+    const response = await fetch(url)
+    const logoutJson = await response.json()
+    console.log(logoutJson);
+
+    if (logoutJson.status === 200) {
+      this.setState({
+        loggedIn: false,
+        renderLogin: false
+      })
+    }
+  }catch(err){
+    console.log(err)
+  }
+}
+
   render() {
     return(
       <div className="App">
         <h1>Tipped Off</h1>
         {
-          this.state.loggedIn === true
+          this.state.renderLogin === false
           ?
           <TipContainer
+          className='main'
           loggedIn={this.state.loggedIn}
           currentUserEmail={this.state.currentUserEmail}
+          showLogin={this.showLogin}
+          logout={this.logout}
           />
           :
-          <div className='loginContainer'>
+          <div className='login-container'>
             <div>
             <LoginRegister
             register={this.register}

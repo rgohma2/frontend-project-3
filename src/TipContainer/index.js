@@ -2,6 +2,7 @@ import React from 'react'
 import TipList from './TipList'
 import NewTipForm from './NewTipForm'
 import EditTipModal from './EditTipModal'
+import './index.css'
 
 import {Header, Sidebar, Menu, Segment} from 'semantic-ui-react'
 
@@ -12,7 +13,7 @@ class TipContainer extends React.Component {
 
 		this.state = {
 			tips: [],
-			category: '',
+			category: 'movies',
 			visible: false,
 			newModalOpen: false,
 			idOfTipToEdit: -1
@@ -159,10 +160,27 @@ class TipContainer extends React.Component {
 			      </Menu.Item>
 			      <Menu.Item>
 			      </Menu.Item>
-			      <Menu.Item as='a' onClick={this.toggleNewModal}>
-			      	Add A Tip
-			      </Menu.Item>
-
+			     
+			      {
+			      	this.props.loggedIn === false
+			      	?
+			      	<Menu.Item as='a' onClick={this.props.showLogin}>
+			      		Login
+			      	</Menu.Item>
+			      	:
+			      	<Menu.Item as='a' onClick={this.toggleNewModal}>
+			      		Add A Tip
+			      	</Menu.Item>
+			      }
+			      {
+			      	this.props.loggedIn === true
+			      	?
+			      	<Menu.Item as='a' onClick={this.props.logout}>
+			      		Logout
+			      	</Menu.Item>
+			      	:
+			      	null	
+			      }
 			    </Sidebar>
 
 			    <Sidebar.Pusher>
@@ -180,6 +198,7 @@ class TipContainer extends React.Component {
 			        	<Header className='capitalize'>{this.state.category}</Header>
 			        </Segment>
 			        <TipList 
+			        className='list'
 			        loggedIn={this.props.loggedIn}
 			        currentUserEmail={this.props.currentUserEmail}
 					tips={this.state.tips}
@@ -188,7 +207,7 @@ class TipContainer extends React.Component {
 					editTip={this.editTip}
 					/>
 					{
-						this.state.newModalOpen === true
+						this.state.newModalOpen === true 
 						?
 						<NewTipForm 
 						addTip={this.addTip}

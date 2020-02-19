@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Form, Button, Label } from 'semantic-ui-react'
+import { Form, Button, Label, Segment } from 'semantic-ui-react'
 
 class LoginRegister extends React.Component {
 	constructor(props) {
@@ -47,7 +47,7 @@ class LoginRegister extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<Segment>
 			{
 				this.state.action === 'login'
 				?
@@ -94,7 +94,7 @@ class LoginRegister extends React.Component {
 					: 
 					<small>don't have an account yet? sign up <span className='link' onClick={this.switchForm}>here</span>.</small>
 				}
-			</div>
+			</Segment>
 		)
 	}
 }

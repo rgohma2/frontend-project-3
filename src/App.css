@@ -12,7 +12,11 @@
 	cursor: pointer;
 }
 
-.loginContainer {
+.main {
+	height: 100%;
+}
+
+.login-container {
 	display: flex;
 	justify-content: center;
 }
