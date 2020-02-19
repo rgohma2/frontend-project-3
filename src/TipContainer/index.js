@@ -73,6 +73,11 @@ class TipContainer extends React.Component {
 
 			const deleteJson = await response.json()
 			console.log(deleteJson);
+			if (deleteJson.status === 200){
+				this.setState({
+					tips: this.state.tips.filter(tip => tip.id !== id)
+				})
+			}
 
 		}catch(err){
 			console.log(err)
