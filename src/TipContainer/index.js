@@ -1,6 +1,7 @@
 import React from 'react'
 import TipList from './TipList'
 import NewTipForm from './NewTipForm'
+import EditTipModal from './EditTipModal'
 
 import {Header, Sidebar, Menu, Segment} from 'semantic-ui-react'
 
@@ -12,7 +13,8 @@ class TipContainer extends React.Component {
 		this.state = {
 			tips: [],
 			category: '',
-			visible: false
+			visible: false,
+			idOfTipToEdit: -1
 		}
 	}
 
@@ -84,6 +86,22 @@ class TipContainer extends React.Component {
 		}
 	}
 
+	editTip = (id) => {
+		const tipToEdit = this.state.tips.find(tip => tip.id === id)
+		console.log(tipToEdit);
+		this.setState({
+			idOfTipToEdit: tipToEdit.id
+		})
+	}
+
+	updateTip = async (id) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/tips/' + id
+		const response = await fetch(url, {
+
+		})
+
+	}
+
 	render() {
 		return(
 			<div>
@@ -127,10 +145,19 @@ class TipContainer extends React.Component {
 					tips={this.state.tips}
 					category={this.state.category}
 					deleteTip={this.deleteTip}
+					editTip={this.editTip}
 					/>
 					<NewTipForm 
 					addTip={this.addTip}
 					/>
+					{
+						this.state.idOfTipToEdit !== -1
+						?
+						<EditTipModal
+						/>
+						:
+						null
+					}
 			      </Segment>
 			    </Sidebar.Pusher>
 			  </Sidebar.Pushable>	

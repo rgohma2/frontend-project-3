@@ -19,6 +19,7 @@ function TipList(props){
 							?
 							<div className='ui two buttons'>
 					        	<Button 
+					        	onClick={() => props.editTip(tip.id)} 
 					        	color='green'>
 					        		Edit
 					        	</Button>
@@ -31,7 +32,6 @@ function TipList(props){
 					        :
 					        null
 						}
-						{console.log(tip.creator)}
 					</Card.Content>
 				</Card>
 			})}
