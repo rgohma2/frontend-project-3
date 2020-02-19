@@ -47,6 +47,7 @@ class LoginRegister extends React.Component {
 
 	render() {
 		return(
+			<div>
 			<Segment>
 			{
 				this.state.action === 'login'
@@ -95,6 +96,10 @@ class LoginRegister extends React.Component {
 					<small>don't have an account yet? sign up <span className='link' onClick={this.switchForm}>here</span>.</small>
 				}
 			</Segment>
+			<Segment>
+				<Button onClick={this.props.toggleLoginRender}>Back</Button>
+			</Segment>
+			</div>
 		)
 	}
 }

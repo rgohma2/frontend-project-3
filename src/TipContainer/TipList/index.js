@@ -13,26 +13,29 @@ function TipList(props){
 				return <Card centered={true} key={tip.id}>
 					<Card.Header><h1>{tip.tip}</h1></Card.Header>
 					<Card.Description>{tip.description}</Card.Description>
-					<Card.Content>
+					
 						{	
 							props.loggedIn === true && tip.creator.email === props.currentUserEmail
 							?
+							
+							<Card.Content>
 							<div className='ui two buttons'>
 					        	<Button 
 					        	onClick={() => props.editTip(tip.id)} 
-					        	color='green'>
+					        	color='basic green'>
 					        		Edit
 					        	</Button>
 					        	<Button
 					        	onClick={() => props.deleteTip(tip.id)} 
-					        	color='red'>
+					        	color='basic red'>
 					        		Delete
 					        	</Button>
 					        </div>
+					        </Card.Content>
 					        :
 					        null
 						}
-					</Card.Content>
+					
 				</Card>
 			})}
 		</div>

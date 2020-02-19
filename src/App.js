@@ -37,11 +37,10 @@ register = async (registerInfo) => {
   }
 }
 
-showLogin = () => {
-  this.setState({
-    renderLogin: true
-  })
+toggleLoginRender = () => {
+  this.setState({renderLogin: this.state.renderLogin === false ? true : false})
 }
+
 
 login = async (loginInfo) => {
   console.log(loginInfo);
@@ -103,13 +102,14 @@ logout = async () => {
           className='main'
           loggedIn={this.state.loggedIn}
           currentUserEmail={this.state.currentUserEmail}
-          showLogin={this.showLogin}
+          toggleLoginRender={this.toggleLoginRender}
           logout={this.logout}
           />
           :
           <div className='login-container'>
             <div>
             <LoginRegister
+            toggleLoginRender={this.toggleLoginRender}
             register={this.register}
             login={this.login}
             />

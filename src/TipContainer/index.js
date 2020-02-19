@@ -164,7 +164,7 @@ class TipContainer extends React.Component {
 			      {
 			      	this.props.loggedIn === false
 			      	?
-			      	<Menu.Item as='a' onClick={this.props.showLogin}>
+			      	<Menu.Item as='a' onClick={this.props.toggleLoginRender}>
 			      		Login
 			      	</Menu.Item>
 			      	:
