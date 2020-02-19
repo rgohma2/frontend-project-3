@@ -14,15 +14,17 @@ function TipList(props){
 					<Card.Header><h1>{tip.tip}</h1></Card.Header>
 					<Card.Description>{tip.description}</Card.Description>
 					<Card.Content>
-						{
-							
+						{	
 							props.loggedIn === true && tip.creator.email === props.currentUserEmail
 							?
 							<div className='ui two buttons'>
-					        	<Button color='green'>
+					        	<Button 
+					        	color='green'>
 					        		Edit
 					        	</Button>
-					        	<Button color='red'>
+					        	<Button
+					        	onClick={() => props.deleteTip(tip.id)} 
+					        	color='red'>
 					        		Delete
 					        	</Button>
 					        </div>

@@ -63,6 +63,22 @@ class TipContainer extends React.Component {
 		}
 	}
 
+	deleteTip = async (id) => {
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/tips/' + id
+			const response = await fetch(url, {
+				credentials: 'include',
+				method: 'DELETE'
+			})
+
+			const deleteJson = await response.json()
+			console.log(deleteJson);
+
+		}catch(err){
+			console.log(err)
+		}
+	}
+
 	render() {
 		return(
 			<div>
@@ -105,7 +121,7 @@ class TipContainer extends React.Component {
 			        currentUserEmail={this.props.currentUserEmail}
 					tips={this.state.tips}
 					category={this.state.category}
-
+					deleteTip={this.deleteTip}
 					/>
 					<NewTipForm 
 					addTip={this.addTip}
