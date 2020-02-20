@@ -34,7 +34,7 @@ class TipList extends React.Component{
 						        <Card.Content >
 							      <Button color='red' onClick={this.addLike}>
 							        <Icon name='heart' />
-							        Like
+							        Favorites
 							      </Button>
 							      <Label as='a' basic color='red' pointing='left'>
 							        {this.state.likes}

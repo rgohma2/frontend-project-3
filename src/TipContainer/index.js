@@ -121,7 +121,7 @@ class TipContainer extends React.Component {
     		const updateJson = await response.json()
     		console.log(updateJson);
 
-    		if (updateJson.status === 200) {
+    		if (updateJson.status === 201) {
     			const tips = this.state.tips
     			const index = tips.findIndex(tip => tip.id === this.state.idOfTipToEdit)
     			tips[index] = updateJson.data 

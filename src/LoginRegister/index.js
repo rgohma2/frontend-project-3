@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Form, Button, Label, Segment } from 'semantic-ui-react'
+import { Form, Button, Label, Segment, Message } from 'semantic-ui-react'
 
 class LoginRegister extends React.Component {
 	constructor(props) {
@@ -15,9 +15,6 @@ class LoginRegister extends React.Component {
 		}
 	}
 
-	// componentDidMount() {
-	// 	console.log(this.props.register);
-	// }
 
 	switchForm = () => {
 		this.setState({
@@ -39,12 +36,9 @@ class LoginRegister extends React.Component {
 	LoginRegister = () => {
 		if (this.state.action === 'sign up') {
 			this.props.register(this.state)
-			this.setState({
-				action: 'login'
-			})
+				this.switchForm()
 		} else {
 			this.props.login(this.state)
-			console.log('this is getting runnnn');
 		}
 	}
 
@@ -52,6 +46,13 @@ class LoginRegister extends React.Component {
 	render() {
 		return(
 			<div>
+				{
+					this.props.message !== ''
+					?
+					<Message color={this.props.status} header={this.props.message} />
+					:
+					null
+				}
 			<Segment>
 			{
 				this.state.action === 'login'
@@ -90,7 +91,7 @@ class LoginRegister extends React.Component {
 				value={this.state.password}
 				onChange={this.handleChange}
 				/>
-				<Button className='capitalize' type='submit'>{this.state.action}</Button>
+				<Button color='blue' className='capitalize' type='submit'>{this.state.action}</Button>
 			</Form>
 				{
 					this.state.action === 'sign up'

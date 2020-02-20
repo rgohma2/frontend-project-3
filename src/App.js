@@ -11,7 +11,9 @@ class App extends React.Component {
       loggedIn: false,
       renderLogin: false,
       currentUserName: '',
-      currentUserEmail: ''
+      currentUserEmail: '',
+      message: '',
+      status: 'red'
     }
   }
 
@@ -31,6 +33,17 @@ register = async (registerInfo) => {
 
     const registerJson = await response.json()
     console.log(registerJson);
+    console.log(registerJson.message);
+ 
+    if (registerJson.status === 201) {
+      this.setState({
+        status: 'green'
+      })
+    } 
+
+    this.setState({
+      message: registerJson.message,
+    })
   
   }catch(err){
     console.log(err);
@@ -57,14 +70,21 @@ login = async (loginInfo) => {
         }
     })
     const loginJson = await response.json()
-    console.log(loginJson);
+    console.log(loginJson.message);
+
 
     if (loginJson.status === 200) {
       this.setState({
         renderLogin: false,
         loggedIn: true,
         currentUserName: loginJson.data.name,
-        currentUserEmail: loginJson.data.email
+        currentUserEmail: loginJson.data.email,
+        message: loginJson.message,
+        status: 'green'
+      })
+    } else {
+      this.setState({
+        message: loginJson.message
       })
     }
 
@@ -83,7 +103,14 @@ logout = async () => {
     if (logoutJson.status === 200) {
       this.setState({
         loggedIn: false,
-        renderLogin: false
+        renderLogin: false,
+        registered: false,
+        message: logoutJson.message,
+        status: 'green'
+      })
+    } else {
+      this.setState({
+        message: logoutJson.message
       })
     }
   }catch(err){
@@ -112,6 +139,8 @@ logout = async () => {
             toggleLoginRender={this.toggleLoginRender}
             register={this.register}
             login={this.login}
+            message={this.state.message}
+            status={this.state.status}
             />
             </div>
           </div>
