@@ -37,10 +37,14 @@ class LoginRegister extends React.Component {
 	}
 
 	LoginRegister = () => {
-		if (this.props.action === 'sign up') {
+		if (this.state.action === 'sign up') {
 			this.props.register(this.state)
+			this.setState({
+				action: 'login'
+			})
 		} else {
 			this.props.login(this.state)
+			console.log('this is getting runnnn');
 		}
 	}
 

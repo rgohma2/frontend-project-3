@@ -1,5 +1,10 @@
+/*body {
+	background-color: gray;
+}*/
+
 .App {
   text-align: center;
+  background-color: white;
 }
 
 .capitalize {
@@ -12,13 +17,12 @@
 	cursor: pointer;
 }
 
-.main {
-	height: 100%;
-}
-
 .login-container {
 	display: flex;
 	justify-content: center;
 }
 
+.main {
+	background-color: blue;
+}
 

@@ -141,10 +141,12 @@ class TipContainer extends React.Component {
 			<div>
 				<Sidebar.Pushable as={Segment}>
 			    <Sidebar
+
 			      as={Menu}
-			      animation='overlay'
+			      animation='slide along'
 			      icon='labeled'
 			      inverted
+			      direction='left'
 			      
 			      vertical
 			      visible={this.state.visible}
