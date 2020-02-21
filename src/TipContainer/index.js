@@ -132,6 +132,10 @@ class TipContainer extends React.Component {
     		}
     }
 
+    
+
+  
+
 	render() {
 		const movies = <Icon name='film' />
 		const shows = <Icon name='tv' />
@@ -207,9 +211,6 @@ class TipContainer extends React.Component {
 				        	this.setState({visible:true})
 				        }>Menu</Header>
 				    </Segment>
-			        <Segment>
-			        	<Header className='capitalize'>{this.state.category}</Header>
-			        </Segment>
 			        <TipList 
 			        className='list'
 			        loggedIn={this.props.loggedIn}
