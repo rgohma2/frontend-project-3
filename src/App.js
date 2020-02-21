@@ -110,7 +110,8 @@ logout = async () => {
       })
     } else {
       this.setState({
-        message: logoutJson.message
+        message: logoutJson.message,
+        status: 'red'
       })
     }
   }catch(err){

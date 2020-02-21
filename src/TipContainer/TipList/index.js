@@ -85,7 +85,7 @@ class TipList extends React.Component{
 				{
 					this.state.message !== ''
 					?
-					<Message header={this.state.message} />
+					<Message header={this.state.message} onDismiss={this.resetMessage}></Message>
 					:
 					null
 				}
