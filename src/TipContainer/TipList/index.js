@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Card, Grid, Icon, Label, Message} from 'semantic-ui-react'
+import { Button, Card, Grid, Icon, Label, Message, Header, Segment} from 'semantic-ui-react'
 
 class TipList extends React.Component{
 	constructor() {
@@ -14,10 +14,13 @@ class TipList extends React.Component{
 	}
 
 	componentDidMount() {
+		this.getFavorites()
+	}
+
+	resetMessage = () => {
 		this.setState({
 			message: ''
 		})
-		this.getFavorites()
 	}
 
 	getFavorites = async () => {
@@ -33,11 +36,10 @@ class TipList extends React.Component{
 
     	if (favoritesJson.status === 201) {
 	    	this.setState({
-	    		favorites: favoritesJson.data,
-	    		message: ''
+	    		favorites: favoritesJson.data
 	    	})
 	    } 
-    	console.log(this.state.message);
+	    this.resetMessage()
     }
 
      addFavorite = async (id) => {
@@ -58,9 +60,15 @@ class TipList extends React.Component{
 				message: newFavJson.message
 			})
     	} else {
-    		this.setState({
-    			message:newFavJson.message
-    		})
+    		if (this.props.loggedIn === false) {
+    			this.setState({
+    				message: 'you must be logged in to favorite a tip!'
+    			})
+    		} else {
+    			this.setState({
+    				message:newFavJson.message
+    			})
+    		}
     	}
     }
 
@@ -71,13 +79,16 @@ class TipList extends React.Component{
 	const tips = this.props.tips.filter(tip => tip.category === this.props.category)	
 		return(
 			<div>
+				<Segment>
+					<Header>{this.props.category}</Header>
 				{
-					this.props.message !== ''
+					this.state.message !== ''
 					?
 					<Message header={this.state.message} />
 					:
 					null
 				}
+				</Segment>
 			<Grid divided='vertically'>
 				<Grid.Row columns={3}>
 				{tips.map(tip => {
