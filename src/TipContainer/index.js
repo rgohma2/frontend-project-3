@@ -198,6 +198,7 @@ class TipContainer extends React.Component {
 			      	:
 			      	null	
 			      }
+
 			    </Sidebar>
 
 			    <Sidebar.Pusher>

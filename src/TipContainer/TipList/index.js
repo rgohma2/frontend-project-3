@@ -76,7 +76,8 @@ class TipList extends React.Component{
 	//** Top Tips ** based on votes (to be implemeted later)
 	render() {
 	console.log(this.state.favorites);
-	const tips = this.props.tips.filter(tip => tip.category === this.props.category)	
+	const tips = this.props.tips.filter(tip => tip.category === this.props.category)
+
 		return(
 			<div>
 				<Segment>
